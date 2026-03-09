@@ -12,5 +12,11 @@ void main() {
 
     stdout.write("Masukkan Tinggi Badan (cm): ");
     double? tinggiCm = double.tryParse(stdin.readLineSync()!);
+    
+    //(input-validation)
+    if (berat == null || tinggiCm == null || berat <= 0 || tinggiCm <= 0) {
+      print("Input tidak valid! Harap masukkan angka positif.");
+      continue;
+    }
   }
 }
