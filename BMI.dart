@@ -12,21 +12,47 @@ void main() {
 
     stdout.write("Masukkan Tinggi Badan (cm): ");
     double? tinggiCm = double.tryParse(stdin.readLineSync()!);
-    
-    //(input-validation)
+
+    // Validasi Input (Branch input-validation)
     if (berat == null || tinggiCm == null || berat <= 0 || tinggiCm <= 0) {
       print("Input tidak valid! Harap masukkan angka positif.");
       continue;
     }
-    // Menampilkan Riwayat (Branch history-feature)
-    print("\n=== RIWAYAT PERHITUNGAN ===");
-    if (riwayat.isEmpty) {
-      print("Belum ada data.");
+
+    // Kalkulasi BMI (Branch bmi-calculation)
+    double tinggiM = tinggiCm / 100;
+    double bmi = berat / (tinggiM * tinggiM);
+
+    // Kategorisasi (Branch bmi-calculation)
+    String kategori;
+    if (bmi < 18.5) {
+      kategori = "Kurus";
+    } else if (bmi < 25) {
+      kategori = "Normal";
+    } else if (bmi < 30) {
+      kategori = "Gemuk";
     } else {
-      for (var i = 0; i < riwayat.length; i++) {
-        print("${i + 1}. ${riwayat[i]}");
-      }
+      kategori = "Obesitas";
     }
-    print("===========================");
+
+    String hasil = "Berat: ${berat}kg, Tinggi: ${tinggiCm}cm | BMI: ${bmi.toStringAsFixed(1)} ($kategori)";
+    riwayat.add(hasil);
+
+    print("\nHasil: $hasil");
+
+    stdout.write("\nHitung lagi? (y/n): ");
+    String? pilihan = stdin.readLineSync()?.toLowerCase();
+    if (pilihan != 'y') lanjut = false;
+  }
+
+  // Menampilkan Riwayat (Branch history-feature)
+  print("\n=== RIWAYAT PERHITUNGAN ===");
+  if (riwayat.isEmpty) {
+    print("Belum ada data.");
+  } else {
+    for (var i = 0; i < riwayat.length; i++) {
+      print("${i + 1}. ${riwayat[i]}");
     }
+  }
+  print("===========================");
 }
