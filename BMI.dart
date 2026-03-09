@@ -18,5 +18,15 @@ void main() {
       print("Input tidak valid! Harap masukkan angka positif.");
       continue;
     }
-  }
+    // Menampilkan Riwayat (Branch history-feature)
+    print("\n=== RIWAYAT PERHITUNGAN ===");
+    if (riwayat.isEmpty) {
+      print("Belum ada data.");
+    } else {
+      for (var i = 0; i < riwayat.length; i++) {
+        print("${i + 1}. ${riwayat[i]}");
+      }
+    }
+    print("===========================");
+    }
 }
